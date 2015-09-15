@@ -1,16 +1,20 @@
-app.controller('TodoCtrl', ['$scope', '$window', function($scope, $window){
+app.controller('TodoCtrl', ['$scope', '$window', 'todoService', function($scope, $window, todoService){
 
   $scope.item = { text: "Get groceries from the store",
                 dueDate: new Date(),
                 completed: false };
 
-  $scope.items = [{text: "Get Groceries from the store", dueDate: "Sep 7, 2016", completed: false},{text: "Get Groceries from the store", dueDate: "Sep 7, 2016", completed: false}];
+  $scope.items = todoService.getItems();
+
+  // todoService.setItems($scope.items);
+
   $scope.createTodo = function(){
-    $scope.items.push({text: $scope.taskText, dueDate: $scope.taskDate, completed: false});
+    todoService.createTodo({text: $scope.taskText, dueDate: $scope.taskDate, completed: false});
     $scope.taskText=null;
     $scope.dueDate=null;
     $window.alert("Task created");
   };
+
   $scope.clearCompleted = function(){
     for (var i=0; i < $scope.items.length; i++){
       if ($scope.items[i].completed){
@@ -18,6 +22,7 @@ app.controller('TodoCtrl', ['$scope', '$window', function($scope, $window){
       }
     }
   };
+
   $scope.buttonFilterCompleted = "Hide completed"
   $scope.showCompleted = function(){
     if (!($scope.isCompleted == undefined))
@@ -27,17 +32,18 @@ app.controller('TodoCtrl', ['$scope', '$window', function($scope, $window){
       {$scope.isCompleted = false;
       $scope.buttonFilterCompleted = "Show completed"
       }
-  
+
   };
   $scope.deleteTodo = function(index){
-    $scope.items.splice(index, 1)
+    todoService.deleteTodo(index);
+    // $scope.items.splice(index, 1)
   }
 }
 ]);
 
 app.filter('showUncompleted', function(){
   return function(collection, isCompleted){
-    
+
     if (isCompleted == undefined) {return collection}
     var results=[];
 
