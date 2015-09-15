@@ -1,16 +1,12 @@
 <tr ng-repeat="(index, item) in items | showUncompleted : isCompleted">
   <td>
     <form action="">
-      <input type="checkbox" ng-model=item.completed>{{item.completed}}<br>
+      <input type="checkbox" ng-model=item.completed>
+      {{item.text}}
+      {{item.dueDate | date}}
+      <a href="" ng-click="deleteTodo(index)">X</a>
     </form>
-  </td>
-  <td>
-    {{item.text}}
-  </td>
-  <td>
-    {{item.dueDate | date}}
-  </td>
-  <td>
-    <a href="" ng-click="deleteTodo(index)">Delete</a>
+  
+    
   </td>
 </tr>

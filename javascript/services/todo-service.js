@@ -11,26 +11,26 @@ app.factory('todoService', function(){
   // };
 
   obj.setItems = function(items){
-    _items = items
-  }
+    _items = items;
+  };
 
   obj.getItems = function(){
-    return _items
-  }
+    return _items;
+  };
 
   obj.addItem = function(item){
     _items.push(item);
-    return _items
-  }
+    return _items;
+  };
 
   obj.createTodo = function(items, item){
     _items.push(item);
   };
 
   obj.deleteTodo = function(index){
-    _items.splice(index, 1)
-  }
+    _items.splice(index, 1);
+  };
 
   return obj;
 
-})
+});

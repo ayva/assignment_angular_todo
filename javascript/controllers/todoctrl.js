@@ -1,18 +1,25 @@
 app.controller('TodoCtrl', ['$scope', '$window', 'todoService', function($scope, $window, todoService){
+  $scope.taskText="";
+  $scope.taskDate="";
 
-  $scope.item = { text: "Get groceries from the store",
-                dueDate: new Date(),
-                completed: false };
 
-  $scope.items = todoService.getItems();
+  $scope.items = [{text: "Get Groceries from the store", dueDate: "Sep 7, 2016", completed: true},{text: "Get Groceries from the store", dueDate: "Sep 6, 2016", completed: false}]
+  //todoService.getItems();
 
   // todoService.setItems($scope.items);
 
   $scope.createTodo = function(){
-    todoService.createTodo({text: $scope.taskText, dueDate: $scope.taskDate, completed: false});
+    var item = { text: $scope.taskText,
+                  dueDate: $scope.taskDate,
+                  completed: false };
+                  console.log(item);
+    $scope.items.push(item)
     $scope.taskText=null;
-    $scope.dueDate=null;
-    $window.alert("Task created");
+    $scope.taskDate=null;
+    //todoService.createTodo({text: $scope.taskText, dueDate: $scope.taskDate, completed: false});
+    //$scope.items=
+    //$scope.item = {text: null, dueDate: null, completed: false}
+    //$window.alert("Task created");
   };
 
   $scope.clearCompleted = function(){

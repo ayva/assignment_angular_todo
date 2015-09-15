@@ -8,15 +8,26 @@
 
   <div ng-controller='TodoCtrl'>
     <form>
+      
 
+        Sort by: <select ng-model="orderOptions" >
+          <option value="">Default</option>
+          <option value="-completed">Completed on top</option>
+          <option value="comleted">Completed on bottom</option>
+          <option value="-dueDate">Due date descending</option>
+          <option value="dueDate">Due date ascending</option>
+        </select>
       Task: <input type="text" ng-model="taskText">
+      
       <br>
       DueDate: <input type="date" ng-model="taskDate">
+  
       <br>
       <input type="submit" ng-click="createTodo()">
     </form>
+
     <table>
-      <div todo-item ng-repeat="(index, item) in items | showUncompleted : isCompleted"></div>
+      <div todo-item ng-repeat="(index, item) in items | showUncompleted : isCompleted | orderBy: orderOptions"></div>
     </table>
 
     <a href="" class="btn btn-default" ng-click="showCompleted()">{{buttonFilterCompleted}}</a>
@@ -24,7 +35,7 @@
 
     <br>
 
-    Not Completed. One day this will be a checkbox.
+    
   </div>
 
 <script src="app.js"></script>
