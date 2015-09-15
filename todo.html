@@ -16,7 +16,8 @@
       <input type="submit" ng-click="createTodo()">
     </form>
     <table>
-      <tr ng-repeat="(index, item) in items">
+      <tr ng-repeat="(index, item) in items | showUncompleted : isCompleted">
+       
         <td>
           <form action="">
             <input type="checkbox" ng-model=item.completed>{{item.completed}}<br>
@@ -34,7 +35,7 @@
       </tr>
     </table>
 
-    <a href="" class="btn btn-default" ng-click="showCompleted()">Show Completed</a>
+    <a href="" class="btn btn-default" ng-click="showCompleted()">{{buttonFilterCompleted}}</a>
     <a href="" class="btn btn-default" ng-click="clearCompleted()">Clear Completed</a>
 
     <br>

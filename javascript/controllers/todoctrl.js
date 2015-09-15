@@ -18,11 +18,35 @@ app.controller('TodoCtrl', ['$scope', '$window', function($scope, $window){
       }
     }
   };
+  $scope.buttonFilterCompleted = "Hide completed"
   $scope.showCompleted = function(){
-
-  }
+    if (!($scope.isCompleted == undefined))
+      {$scope.isCompleted = undefined;
+      $scope.buttonFilterCompleted = "Hide completed"}
+    else
+      {$scope.isCompleted = false;
+      $scope.buttonFilterCompleted = "Show completed"
+      }
+  
+  };
   $scope.deleteTodo = function(index){
     $scope.items.splice(index, 1)
   }
 }
 ]);
+
+app.filter('showUncompleted', function(){
+  return function(collection, isCompleted){
+    
+    if (isCompleted == undefined) {return collection}
+    var results=[];
+
+    angular.forEach(collection, function(element){
+      if (element.completed == false) {
+        results.push(element);
+      }
+    })
+
+    return results;
+  }
+})
