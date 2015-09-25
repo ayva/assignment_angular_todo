@@ -7,33 +7,50 @@
 <body ng-app='ToDo'>
 
   <div ng-controller='TodoCtrl'>
-    <form>
-      
 
-        Sort by: <select ng-model="orderOptions" >
-          <option value="">Default</option>
-          <option value="-completed">Completed on top</option>
-          <option value="comleted">Completed on bottom</option>
-          <option value="-dueDate">Due date descending</option>
-          <option value="dueDate">Due date ascending</option>
-        </select>
-      Task: <input type="text" ng-model="taskText">
-      
-      <br>
-      DueDate: <input type="date" ng-model="taskDate">
-  
-      <br>
-      <input type="submit" ng-click="createTodo()">
-    </form>
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h1> Angular To-Do List. </h1>
+    </div>
+    <div class="row">
+      <div class="col-xs-offset-3 col-xs-6">
+        <form class="form-group">
+          
 
-    <table>
-      <div todo-item ng-repeat="(index, item) in items | showUncompleted : isCompleted | orderBy: orderOptions"></div>
-    </table>
+            
+          <div class="form-group">
+            <label >Task: </label>
+            <input class="form-control" type="text" ng-model="taskText">
+          </div>  
+          
+          <div class="form-group">
+            <label >Due date: </label>
+            <input class="form-control" type="date" ng-model="taskDate">
+          </div>
 
-    <a href="" class="btn btn-default" ng-click="showCompleted()">{{buttonFilterCompleted}}</a>
-    <a href="" class="btn btn-default" ng-click="clearCompleted()">Clear Completed</a>
+          
+          <button class="btn btn-success" type="submit" ng-click="createTodo()">Add a task</button>
+        </form>
+            <label >Sort by: </label>
+            <select class="form-control" ng-model="orderOptions" >
+              <option value="">Default</option>
+              <option value="-completed">Completed on top</option>
+              <option value="comleted">Completed on bottom</option>
+              <option value="-dueDate">Due date descending</option>
+              <option value="dueDate">Due date ascending</option>
+            </select>
+        <h3>To-Do list:</h3>
+        <table>
+          <div todo-item ng-repeat="(index, item) in items | showUncompleted : isCompleted | orderBy: orderOptions"></div>
+        </table>
 
-    <br>
+        <a href="" class="btn btn-default" ng-click="showCompleted()">{{buttonFilterCompleted}}</a>
+        <a href="" class="btn btn-default" ng-click="clearCompleted()">Clear Completed</a>
+
+        <br>
+      </div>
+    </div>
+  </div>
 
     
   </div>
